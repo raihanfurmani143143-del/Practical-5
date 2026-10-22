@@ -1,0 +1,79 @@
+@page
+@model IndexModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Academic Calendar & Leave Management</title>
+    <style>
+        body { font-family: Arial; background-color: #f2f2f2; margin: 30px; }
+        .container { width: 700px; margin: auto; background: white; padding: 25px; border-radius: 10px; }
+        h1, h2 { text-align: center; }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; display: block; }
+        input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        button { padding: 10px 20px; background: #333; color: white; border: none; cursor: pointer; }
+        .success { margin-top: 20px; padding: 10px; background: #e0ffe0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Academic Calendar & Leave Management System</h1>
+    <hr />
+    <h2>Student Information</h2>
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="StudentName">Student Name</label>
+            <input asp-for="StudentName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentId">Student ID</label>
+            <input asp-for="StudentId" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Department">Department</label>
+            <select asp-for="Department">
+                <option value="">-- Select Department --</option>
+                <option>Computer Engineering</option>
+                <option>Information Technology</option>
+                <option>Mechanical Engineering</option>
+                <option>Civil Engineering</option>
+            </select>
+        </div>
+        <hr />
+        <h2>Academic Calendar</h2>
+        <div class="form-group">
+            <label asp-for="SelectedDate">Select Date</label>
+            <input type="date" asp-for="SelectedDate" />
+        </div>
+        <hr />
+        <h2>Leave Management</h2>
+        <div class="form-group">
+            <label asp-for="LeaveType">Leave Type</label>
+            <select asp-for="LeaveType">
+                <option value="">-- Select Leave Type --</option>
+                <option>Casual Leave</option>
+                <option>Medical Leave</option>
+                <option>Emergency Leave</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="Reason">Reason</label>
+            <textarea asp-for="Reason" rows="4"></textarea>
+        </div>
+        <button type="submit">Apply Leave</button>
+    </form>
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="success">
+            <strong>@Model.Message</strong><br /><br />
+            Student: @Model.StudentName<br />
+            Student ID: @Model.StudentId<br />
+            Department: @Model.Department<br />
+            Leave Type: @Model.LeaveType<br />
+            Date: @Model.SelectedDate.ToShortDateString()<br />
+            Reason: @Model.Reason
+        </div>
+    }
+</div>
+</body>
+</html>
